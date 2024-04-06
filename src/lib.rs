@@ -18,7 +18,7 @@ pub struct Greeter {
     name: String,
 }
 
-pub struct TonesDSP {
+pub struct TonesRKit {
 
 }
 
@@ -33,7 +33,7 @@ impl Greeter {
     }
 }
 
-impl TonesDSP {
+impl TonesRKit {
     // By convention, a method called new is exposed as a constructor
     pub fn new() -> Self {
         Self {  }

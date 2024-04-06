@@ -558,14 +558,14 @@ public func FfiConverterTypeGreeter_lower(_ value: Greeter) -> UnsafeMutableRawP
 
 
 
-public protocol TonesDspProtocol : AnyObject {
+public protocol TonesRKitProtocol : AnyObject {
     
     func getVersion()  -> String
     
 }
 
-open class TonesDsp:
-    TonesDspProtocol {
+open class TonesRKit:
+    TonesRKitProtocol {
     fileprivate let pointer: UnsafeMutableRawPointer!
 
     /// Used to instantiate a [FFIObject] without an actual pointer, for fakes in tests, mostly.
@@ -590,12 +590,12 @@ open class TonesDsp:
     }
 
     public func uniffiClonePointer() -> UnsafeMutableRawPointer {
-        return try! rustCall { uniffi_tonesDSP_fn_clone_tonesdsp(self.pointer, $0) }
+        return try! rustCall { uniffi_tonesDSP_fn_clone_tonesrkit(self.pointer, $0) }
     }
 public convenience init() {
     let pointer =
         try! rustCall() {
-    uniffi_tonesDSP_fn_constructor_tonesdsp_new($0
+    uniffi_tonesDSP_fn_constructor_tonesrkit_new($0
     )
 }
     self.init(unsafeFromRawPointer: pointer)
@@ -606,7 +606,7 @@ public convenience init() {
             return
         }
 
-        try! rustCall { uniffi_tonesDSP_fn_free_tonesdsp(pointer, $0) }
+        try! rustCall { uniffi_tonesDSP_fn_free_tonesrkit(pointer, $0) }
     }
 
     
@@ -614,7 +614,7 @@ public convenience init() {
     
 open func getVersion() -> String {
     return try!  FfiConverterString.lift(try! rustCall() {
-    uniffi_tonesDSP_fn_method_tonesdsp_getversion(self.uniffiClonePointer(),$0
+    uniffi_tonesDSP_fn_method_tonesrkit_getversion(self.uniffiClonePointer(),$0
     )
 })
 }
@@ -622,20 +622,20 @@ open func getVersion() -> String {
 
 }
 
-public struct FfiConverterTypeTonesDSP: FfiConverter {
+public struct FfiConverterTypeTonesRKit: FfiConverter {
 
     typealias FfiType = UnsafeMutableRawPointer
-    typealias SwiftType = TonesDsp
+    typealias SwiftType = TonesRKit
 
-    public static func lift(_ pointer: UnsafeMutableRawPointer) throws -> TonesDsp {
-        return TonesDsp(unsafeFromRawPointer: pointer)
+    public static func lift(_ pointer: UnsafeMutableRawPointer) throws -> TonesRKit {
+        return TonesRKit(unsafeFromRawPointer: pointer)
     }
 
-    public static func lower(_ value: TonesDsp) -> UnsafeMutableRawPointer {
+    public static func lower(_ value: TonesRKit) -> UnsafeMutableRawPointer {
         return value.uniffiClonePointer()
     }
 
-    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> TonesDsp {
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> TonesRKit {
         let v: UInt64 = try readInt(&buf)
         // The Rust code won't compile if a pointer won't fit in a UInt64.
         // We have to go via `UInt` because that's the thing that's the size of a pointer.
@@ -646,7 +646,7 @@ public struct FfiConverterTypeTonesDSP: FfiConverter {
         return try lift(ptr!)
     }
 
-    public static func write(_ value: TonesDsp, into buf: inout [UInt8]) {
+    public static func write(_ value: TonesRKit, into buf: inout [UInt8]) {
         // This fiddling is because `Int` is the thing that's the same size as a pointer.
         // The Rust code won't compile if a pointer won't fit in a `UInt64`.
         writeInt(&buf, UInt64(bitPattern: Int64(Int(bitPattern: lower(value)))))
@@ -656,12 +656,12 @@ public struct FfiConverterTypeTonesDSP: FfiConverter {
 
 
 
-public func FfiConverterTypeTonesDSP_lift(_ pointer: UnsafeMutableRawPointer) throws -> TonesDsp {
-    return try FfiConverterTypeTonesDSP.lift(pointer)
+public func FfiConverterTypeTonesRKit_lift(_ pointer: UnsafeMutableRawPointer) throws -> TonesRKit {
+    return try FfiConverterTypeTonesRKit.lift(pointer)
 }
 
-public func FfiConverterTypeTonesDSP_lower(_ value: TonesDsp) -> UnsafeMutableRawPointer {
-    return FfiConverterTypeTonesDSP.lower(value)
+public func FfiConverterTypeTonesRKit_lower(_ value: TonesRKit) -> UnsafeMutableRawPointer {
+    return FfiConverterTypeTonesRKit.lower(value)
 }
 
 
@@ -793,13 +793,13 @@ private var initializationResult: InitializationResult {
     if (uniffi_tonesDSP_checksum_method_greeter_greet() != 22892) {
         return InitializationResult.apiChecksumMismatch
     }
-    if (uniffi_tonesDSP_checksum_method_tonesdsp_getversion() != 1923) {
+    if (uniffi_tonesDSP_checksum_method_tonesrkit_getversion() != 16881) {
         return InitializationResult.apiChecksumMismatch
     }
     if (uniffi_tonesDSP_checksum_constructor_greeter_new() != 51367) {
         return InitializationResult.apiChecksumMismatch
     }
-    if (uniffi_tonesDSP_checksum_constructor_tonesdsp_new() != 53984) {
+    if (uniffi_tonesDSP_checksum_constructor_tonesrkit_new() != 21885) {
         return InitializationResult.apiChecksumMismatch
     }
 

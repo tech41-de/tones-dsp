@@ -16,7 +16,7 @@ interface Greeter {
 	string greet();
 };
 
-interface TonesDSP {
+interface TonesRKit {
     constructor();
     string getVersion();
 };
