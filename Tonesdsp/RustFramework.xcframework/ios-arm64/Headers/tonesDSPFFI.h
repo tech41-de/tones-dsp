@@ -271,6 +271,27 @@ void*_Nonnull uniffi_tonesDSP_fn_constructor_greeter_new(RustBuffer name, RustCa
 RustBuffer uniffi_tonesDSP_fn_method_greeter_greet(void*_Nonnull ptr, RustCallStatus *_Nonnull out_status
 );
 #endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_TONES_DSP_FN_CLONE_TONESDSP
+#define UNIFFI_FFIDEF_UNIFFI_TONES_DSP_FN_CLONE_TONESDSP
+void*_Nonnull uniffi_tonesDSP_fn_clone_tonesdsp(void*_Nonnull ptr, RustCallStatus *_Nonnull out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_TONES_DSP_FN_FREE_TONESDSP
+#define UNIFFI_FFIDEF_UNIFFI_TONES_DSP_FN_FREE_TONESDSP
+void uniffi_tonesDSP_fn_free_tonesdsp(void*_Nonnull ptr, RustCallStatus *_Nonnull out_status
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_TONES_DSP_FN_CONSTRUCTOR_TONESDSP_NEW
+#define UNIFFI_FFIDEF_UNIFFI_TONES_DSP_FN_CONSTRUCTOR_TONESDSP_NEW
+void*_Nonnull uniffi_tonesDSP_fn_constructor_tonesdsp_new(RustCallStatus *_Nonnull out_status
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_TONES_DSP_FN_METHOD_TONESDSP_GETVERSION
+#define UNIFFI_FFIDEF_UNIFFI_TONES_DSP_FN_METHOD_TONESDSP_GETVERSION
+RustBuffer uniffi_tonesDSP_fn_method_tonesdsp_getversion(void*_Nonnull ptr, RustCallStatus *_Nonnull out_status
+);
+#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_TONES_DSP_FN_FUNC_ADD
 #define UNIFFI_FFIDEF_UNIFFI_TONES_DSP_FN_FUNC_ADD
 uint64_t uniffi_tonesDSP_fn_func_add(uint64_t a, uint64_t b, RustCallStatus *_Nonnull out_status
@@ -568,9 +589,21 @@ uint16_t uniffi_tonesDSP_checksum_method_greeter_greet(void
     
 );
 #endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_TONES_DSP_CHECKSUM_METHOD_TONESDSP_GETVERSION
+#define UNIFFI_FFIDEF_UNIFFI_TONES_DSP_CHECKSUM_METHOD_TONESDSP_GETVERSION
+uint16_t uniffi_tonesDSP_checksum_method_tonesdsp_getversion(void
+    
+);
+#endif
 #ifndef UNIFFI_FFIDEF_UNIFFI_TONES_DSP_CHECKSUM_CONSTRUCTOR_GREETER_NEW
 #define UNIFFI_FFIDEF_UNIFFI_TONES_DSP_CHECKSUM_CONSTRUCTOR_GREETER_NEW
 uint16_t uniffi_tonesDSP_checksum_constructor_greeter_new(void
+    
+);
+#endif
+#ifndef UNIFFI_FFIDEF_UNIFFI_TONES_DSP_CHECKSUM_CONSTRUCTOR_TONESDSP_NEW
+#define UNIFFI_FFIDEF_UNIFFI_TONES_DSP_CHECKSUM_CONSTRUCTOR_TONESDSP_NEW
+uint16_t uniffi_tonesDSP_checksum_constructor_tonesdsp_new(void
     
 );
 #endif

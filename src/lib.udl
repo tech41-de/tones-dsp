@@ -15,3 +15,8 @@ interface Greeter {
 	constructor(string name);
 	string greet();
 };
+
+interface TonesDSP {
+    constructor();
+    string getVersion();
+};

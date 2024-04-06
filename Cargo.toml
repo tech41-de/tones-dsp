@@ -16,5 +16,5 @@ uniffi = "0.27"
 [build-dependencies]
 uniffi = { version = "0.27", features = ["build"] }
 
-
-# CARGO_TARGET_DIR=../ cargo swift package
+# cd /Users/mat/TECH41/gitroot/tones-dsp
+# cargo swift package

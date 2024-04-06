@@ -18,6 +18,10 @@ pub struct Greeter {
     name: String,
 }
 
+pub struct TonesDSP {
+
+}
+
 impl Greeter {
     // By convention, a method called new is exposed as a constructor
     pub fn new(name: String) -> Self {
@@ -28,5 +32,17 @@ impl Greeter {
         format!("Hello, {}!", self.name)
     }
 }
+
+impl TonesDSP {
+    // By convention, a method called new is exposed as a constructor
+    pub fn new() -> Self {
+        Self {  }
+    }
+
+    pub fn getVersion(&self) -> String {
+        format!("1.0.0")
+    }
+}
+
 
 // ... and much more! For more information about bindings, read the UniFFI book: https://mozilla.github.io/uniffi-rs/udl_file_spec.html

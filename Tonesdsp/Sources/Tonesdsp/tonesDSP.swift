@@ -556,6 +556,115 @@ public func FfiConverterTypeGreeter_lower(_ value: Greeter) -> UnsafeMutableRawP
 }
 
 
+
+
+public protocol TonesDspProtocol : AnyObject {
+    
+    func getVersion()  -> String
+    
+}
+
+open class TonesDsp:
+    TonesDspProtocol {
+    fileprivate let pointer: UnsafeMutableRawPointer!
+
+    /// Used to instantiate a [FFIObject] without an actual pointer, for fakes in tests, mostly.
+    public struct NoPointer {
+        public init() {}
+    }
+
+    // TODO: We'd like this to be `private` but for Swifty reasons,
+    // we can't implement `FfiConverter` without making this `required` and we can't
+    // make it `required` without making it `public`.
+    required public init(unsafeFromRawPointer pointer: UnsafeMutableRawPointer) {
+        self.pointer = pointer
+    }
+
+    /// This constructor can be used to instantiate a fake object.
+    /// - Parameter noPointer: Placeholder value so we can have a constructor separate from the default empty one that may be implemented for classes extending [FFIObject].
+    ///
+    /// - Warning:
+    ///     Any object instantiated with this constructor cannot be passed to an actual Rust-backed object. Since there isn't a backing [Pointer] the FFI lower functions will crash.
+    public init(noPointer: NoPointer) {
+        self.pointer = nil
+    }
+
+    public func uniffiClonePointer() -> UnsafeMutableRawPointer {
+        return try! rustCall { uniffi_tonesDSP_fn_clone_tonesdsp(self.pointer, $0) }
+    }
+public convenience init() {
+    let pointer =
+        try! rustCall() {
+    uniffi_tonesDSP_fn_constructor_tonesdsp_new($0
+    )
+}
+    self.init(unsafeFromRawPointer: pointer)
+}
+
+    deinit {
+        guard let pointer = pointer else {
+            return
+        }
+
+        try! rustCall { uniffi_tonesDSP_fn_free_tonesdsp(pointer, $0) }
+    }
+
+    
+
+    
+open func getVersion() -> String {
+    return try!  FfiConverterString.lift(try! rustCall() {
+    uniffi_tonesDSP_fn_method_tonesdsp_getversion(self.uniffiClonePointer(),$0
+    )
+})
+}
+    
+
+}
+
+public struct FfiConverterTypeTonesDSP: FfiConverter {
+
+    typealias FfiType = UnsafeMutableRawPointer
+    typealias SwiftType = TonesDsp
+
+    public static func lift(_ pointer: UnsafeMutableRawPointer) throws -> TonesDsp {
+        return TonesDsp(unsafeFromRawPointer: pointer)
+    }
+
+    public static func lower(_ value: TonesDsp) -> UnsafeMutableRawPointer {
+        return value.uniffiClonePointer()
+    }
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> TonesDsp {
+        let v: UInt64 = try readInt(&buf)
+        // The Rust code won't compile if a pointer won't fit in a UInt64.
+        // We have to go via `UInt` because that's the thing that's the size of a pointer.
+        let ptr = UnsafeMutableRawPointer(bitPattern: UInt(truncatingIfNeeded: v))
+        if (ptr == nil) {
+            throw UniffiInternalError.unexpectedNullPointer
+        }
+        return try lift(ptr!)
+    }
+
+    public static func write(_ value: TonesDsp, into buf: inout [UInt8]) {
+        // This fiddling is because `Int` is the thing that's the same size as a pointer.
+        // The Rust code won't compile if a pointer won't fit in a `UInt64`.
+        writeInt(&buf, UInt64(bitPattern: Int64(Int(bitPattern: lower(value)))))
+    }
+}
+
+
+
+
+public func FfiConverterTypeTonesDSP_lift(_ pointer: UnsafeMutableRawPointer) throws -> TonesDsp {
+    return try FfiConverterTypeTonesDSP.lift(pointer)
+}
+
+public func FfiConverterTypeTonesDSP_lower(_ value: TonesDsp) -> UnsafeMutableRawPointer {
+    return FfiConverterTypeTonesDSP.lower(value)
+}
+
+
 public struct Example {
     public var items: [String]
     public var value: Double?
@@ -684,7 +793,13 @@ private var initializationResult: InitializationResult {
     if (uniffi_tonesDSP_checksum_method_greeter_greet() != 22892) {
         return InitializationResult.apiChecksumMismatch
     }
+    if (uniffi_tonesDSP_checksum_method_tonesdsp_getversion() != 1923) {
+        return InitializationResult.apiChecksumMismatch
+    }
     if (uniffi_tonesDSP_checksum_constructor_greeter_new() != 51367) {
+        return InitializationResult.apiChecksumMismatch
+    }
+    if (uniffi_tonesDSP_checksum_constructor_tonesdsp_new() != 53984) {
         return InitializationResult.apiChecksumMismatch
     }
 
